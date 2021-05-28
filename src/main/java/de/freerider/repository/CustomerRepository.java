@@ -15,53 +15,82 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 	private final ArrayList<Customer> customerList = new ArrayList<>();
 
 	@Override
-	public <S extends Customer> S save(S entity) {
-		if(entity.getId() == null) {
-			String id = idGen.nextId();
-			while(existsById(id)) {
-				id = idGen.nextId();
+	public <S extends Customer> S save(S entity)  {
+		if(entity != null) {
+			if(entity.getId() == null || entity.getId() == "") {
+				String id = idGen.nextId();
+				while(existsById(id)) {
+					id = idGen.nextId();
+				}
+				entity.setId(id);
 			}
-			entity.setId(id);
-		}
-		if(!existsById(entity.getId())) {
-			customerList.add(entity);
+			if(!existsById(entity.getId())) {
+				customerList.add(entity);
+			}
+		} else {
+			throw new IllegalArgumentException("Argument entity is null");
 		}
 		return entity;
 	}
 
 	@Override
 	public <S extends Customer> Iterable<S> saveAll(Iterable<S> entities) {
-		for(S entity : entities ) {
-			save(entity);
+		if(entities != null) {
+			for(S entity : entities ) {
+				save(entity);
+			}
+		} else {
+			throw new IllegalArgumentException("Argument entities is null");
 		}
 		return entities;
 	}
 
 	@Override
 	public Optional<Customer> findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (id != null) {
+			for (Customer customer : customerList) {
+				if (existsById(id)) {
+					return Optional.of(customer);
+				}
+			}
+			return Optional.empty();
+		} else {
+			throw new IllegalArgumentException("Argument id is null");
+		}
+		
 	}
 
 	@Override
 	public boolean existsById(String id) {
-		if(customerList.contains(findById(id))){
-			return true;
+		if(id != null) {
+			for (Customer customer : customerList) {
+				if (customer.getId().equals(id)) {
+					return true;
+				}
+				
+			}
+			return false;
 		} else {
-		return false;
+			throw new IllegalArgumentException("Argument id is null");
 		}
 	}
 
 	@Override
 	public Iterable<Customer> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return customerList;
 	}
 
 	@Override
 	public Iterable<Customer> findAllById(Iterable<String> ids) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Customer> returnList = new ArrayList<>();
+		if(ids != null) {
+			for(String id : ids) {
+				returnList.add(findById(id).get());
+			}
+			return returnList;
+		} else {
+			throw new IllegalArgumentException("Argument ids is null");
+		}
 	}
 
 	@Override
@@ -71,32 +100,52 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 
 	@Override
 	public void deleteById(String id) {
-		// TODO Auto-generated method stub
-		
+		if(id != null) {
+			if(existsById(id)) {
+				customerList.remove(findById(id).get());
+			}
+		} else {
+			throw new IllegalArgumentException("Argument id is null");
+		}
 	}
 
 	@Override
 	public void delete(Customer entity) {
-		// TODO Auto-generated method stub
-		
+		if(entity != null) {
+			if(existsById(entity.getId())) {
+				customerList.remove(entity);
+			}
+		} else {
+			throw new IllegalArgumentException("Argument entity is null");
+		}
 	}
 
 	@Override
 	public void deleteAllById(Iterable<? extends String> ids) {
-		// TODO Auto-generated method stub
-		
+		if(ids != null) {
+			for(String id : ids) {
+				findById(id).ifPresent(c ->customerList.remove(c));
+			}	
+		} else {
+			throw new IllegalArgumentException("Argument ids is null");
+		}
 	}
 
 	@Override
 	public void deleteAll(Iterable<? extends Customer> entities) {
-		// TODO Auto-generated method stub
+		if(entities != null) {
+			for(Customer entity : entities) {
+				customerList.remove(entity);
+				}
+		} else {
+			throw new IllegalArgumentException("Argument entities is null");
+		}
 		
 	}
 
 	@Override
 	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
+		customerList.clear();
 	}
 
 
