@@ -25,27 +25,43 @@ public class Customer {
 	}
 	
 	public void setId(String id) {
-		this.id = id;
+		if(id != "") {
+			if(id == null || this.id == null) {
+				this.id = id;
+			}
+		}
 	}
 	
 	public void setStatus(Status status){
 		this.status = status;
+		
 	}
 		
 	
 	
 	public void setFirstName(String firstname) {
-		this.firstName = firstname;
-		
+		if(firstname != null){
+			this.firstName = firstname;
+		} else {
+			this.firstName = "";
+		}
 	}
 	
 	public void setLastName(String lastname) {
-		this.lastName = lastname;
+		if(lastname != null) {
+			this.lastName = lastname;
+		} else {
+			this.lastName = "";
+		}
 		
 	}
 	
 	public void setContact(String contact) {
-		this.contact = contact;
+		if(contact != null) {
+			this.contact = contact;
+		} else {
+			this.contact = "";
+		}
 		
 	}
 	
