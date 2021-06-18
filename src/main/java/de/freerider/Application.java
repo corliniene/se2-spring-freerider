@@ -27,6 +27,7 @@ public class Application {
 		Customer cTim = new Customer("Tim", "Goldberg", "tim_goldberg@web.de");
 		Customer cAnne = new Customer("Anne", "Smith", "asmith@gmail.com");
 		Customer cKim = new Customer("Kim", "Ericsson", "kericsson@gmail.com");
+
 		
 		List<Customer> customers = new ArrayList<>();
 		List<String> ids = new ArrayList<>();

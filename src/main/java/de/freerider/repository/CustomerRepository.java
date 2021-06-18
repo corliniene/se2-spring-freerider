@@ -26,7 +26,17 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 			}
 			if(!existsById(entity.getId())) {
 				customerList.add(entity);
+			} else {
+			Optional <Customer> customer1 = findById(entity.getId());
+				if(customer1.isPresent()) {
+					Customer customer = customer1.get();
+	
+					customerList.remove(customer);
+					customerList.add(entity);
+					entity = (S) customer;
+				}
 			}
+					
 		} else {
 			throw new IllegalArgumentException("Argument entity is null");
 		}
@@ -49,7 +59,7 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 	public Optional<Customer> findById(String id) {
 		if (id != null) {
 			for (Customer customer : customerList) {
-				if (existsById(id)) {
+				if (existsById(id) && id.equals(customer.getId())) {
 					return Optional.of(customer);
 				}
 			}
@@ -85,7 +95,10 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 		ArrayList<Customer> returnList = new ArrayList<>();
 		if(ids != null) {
 			for(String id : ids) {
-				returnList.add(findById(id).get());
+				findById(id).ifPresent(c -> {
+					returnList.add(c);
+				});
+				
 			}
 			return returnList;
 		} else {
@@ -111,12 +124,12 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 
 	@Override
 	public void delete(Customer entity) {
-		if(entity != null) {
-			if(existsById(entity.getId())) {
-				customerList.remove(entity);
-			}
+		if(entity != null && entity.getId() != null) {
+			if( existsById(entity.getId())) {
+					customerList.remove(entity);
+				}
 		} else {
-			throw new IllegalArgumentException("Argument entity is null");
+			throw new IllegalArgumentException("Argument entity or its id is null");
 		}
 	}
 
@@ -135,7 +148,7 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 	public void deleteAll(Iterable<? extends Customer> entities) {
 		if(entities != null) {
 			for(Customer entity : entities) {
-				customerList.remove(entity);
+				delete(entity);
 				}
 		} else {
 			throw new IllegalArgumentException("Argument entities is null");

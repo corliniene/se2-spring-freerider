@@ -25,11 +25,11 @@ public class Customer {
 	}
 	
 	public void setId(String id) {
-		if(id != "") {
+	
 			if(id == null || this.id == null) {
 				this.id = id;
 			}
-		}
+		
 	}
 	
 	public void setStatus(Status status){
@@ -66,25 +66,25 @@ public class Customer {
 	}
 	
 	public String getId() {
-		return id;
+		return this.id;
 	}
 	
 	public Status getStatus(){
-		return status;
+		return this.status;
 	}
 	
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 		
 	}
 	
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 		
 	}
 	
 	public String getContact() {
-		return contact;
+		return this.contact;
 		
 	}
 
