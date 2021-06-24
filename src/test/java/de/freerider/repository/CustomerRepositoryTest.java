@@ -43,8 +43,38 @@ public class CustomerRepositoryTest {
 	@Test
 	void testConstructor(){
 		thomas.setId("a5555");
+		mats.setId("1");
 		assertEquals(0, customerRepository.count());
 		assertFalse(customerRepository.existsById("a5555"));
+		
+		assertEquals(Optional.empty(),customerRepository.findById(mats.getId()));
+		
+		List<Customer> c = (List) customerRepository.findAll();
+		assertEquals(c.size(), 0);
+		
+		ids.add(thomas.getId());
+		ids.add(mats.getId());
+		c = (List) customerRepository.findAllById(ids);
+		assertEquals(c.size(), 0);
+		
+		customerRepository.deleteById("1");
+		assertEquals(0, customerRepository.count());
+		
+		customerRepository.delete(thomas);
+		assertEquals(0, customerRepository.count());
+		
+		customerRepository.deleteAllById(ids);
+		assertEquals(0, customerRepository.count());
+		
+		customers.add(thomas);
+		customers.add(mats);
+		assertEquals(0, customerRepository.count());
+		customerRepository.deleteAll(customers);
+		assertEquals(0, customerRepository.count());
+		
+		customerRepository.deleteAll();
+		assertEquals(0, customerRepository.count());
+		
 	}
 	
 	@Test
