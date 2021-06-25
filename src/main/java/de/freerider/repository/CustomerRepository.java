@@ -2,13 +2,16 @@ package de.freerider.repository;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import de.freerider.model.Customer;
+import de.freerider.datamodel.Customer;
 
 
 @Component
+@Qualifier("CustomerRepository_Impl")
 class CustomerRepository implements CrudRepository<Customer, String> {
 	
 	private final IDGenerator idGen = new IDGenerator( "C", IDGenerator.IDTYPE.NUM, 6 );
@@ -42,6 +45,7 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 		}
 		return entity;
 	}
+	
 
 	@Override
 	public <S extends Customer> Iterable<S> saveAll(Iterable<S> entities) {
@@ -83,6 +87,7 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 		} else {
 			throw new IllegalArgumentException("Argument id is null");
 		}
+	
 	}
 
 	@Override
@@ -105,6 +110,8 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 			throw new IllegalArgumentException("Argument ids is null");
 		}
 	}
+
+	
 
 	@Override
 	public long count() {
@@ -153,7 +160,6 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 		} else {
 			throw new IllegalArgumentException("Argument entities is null");
 		}
-		
 	}
 
 	@Override
@@ -161,6 +167,4 @@ class CustomerRepository implements CrudRepository<Customer, String> {
 		customerList.clear();
 	}
 
-
-	
 }

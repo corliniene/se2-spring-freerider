@@ -1,3 +1,4 @@
+
 package de.freerider;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,3 +13,4 @@ public class HelloController {
 	}
 
 }
+

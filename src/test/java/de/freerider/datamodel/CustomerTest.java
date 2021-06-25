@@ -1,4 +1,4 @@
-package de.freerider.model;
+package de.freerider.datamodel;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 import org.junit.jupiter.api.Test;
+
+import de.freerider.datamodel.Customer;
 
 public class CustomerTest {
 	
@@ -114,7 +116,6 @@ public class CustomerTest {
 	
 	
 	
-
 	
 	
 

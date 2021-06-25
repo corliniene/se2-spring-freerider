@@ -14,6 +14,7 @@ package de.freerider.repository;
  *
  */
 public class IDGenerator {
+	
 	private final String prefix;
 	private final int len;
 	private final String alphabet;
