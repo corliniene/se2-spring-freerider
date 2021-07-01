@@ -38,6 +38,7 @@ build/
 .mvn 
 mvnw
 mvnw.cmd
+
 ### ignore generated directories and compiled output ###
 out
 bin
@@ -58,17 +59,5 @@ target
 *.tar
 *.zip
 
-
-### maven compiled code ###
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### maven wrapper ###
-.mvn
-mvnw*
+### ignore txt files ###
+.txt
