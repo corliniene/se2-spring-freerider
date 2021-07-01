@@ -60,4 +60,4 @@ target
 *.zip
 
 ### ignore txt files ###
-.txt
+*.txt
