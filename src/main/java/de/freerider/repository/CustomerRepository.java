@@ -2,7 +2,6 @@ package de.freerider.repository;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.List;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import de.freerider.datamodel.Customer.Status;
+import de.freerider.datamodel.Customer;
 
 
 /**
